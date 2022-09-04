@@ -12,5 +12,5 @@ Setup:
 - Mailing
 - ...
 
-You can watch this YouTube playlist to see how it's built-up:
+You can watch this YouTube playlist to see how it was built:
 https://youtube.com/playlist?list=PLCRZSJL1Bb7ErP2IbVDFXRYdbNE2fDYtS
