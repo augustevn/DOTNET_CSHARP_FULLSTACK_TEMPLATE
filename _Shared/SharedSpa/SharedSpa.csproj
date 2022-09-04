@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
+        <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0-preview.7.22375.6" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0-preview.7.22375.6" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0-preview.7.22375.6" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.7.22375.6" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-preview.7.22375.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Pages" />
+      <Folder Include="wwwroot" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\_Common\_Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+
+</Project>

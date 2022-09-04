@@ -1,0 +1,11 @@
+﻿version: '3.5'
+
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: MSSQL_PETSOCIAL
+    ports:
+      - "127.0.0.1:1433:1433"
+    environment:
+      SA_PASSWORD: "D3vel0Per"
+      ACCEPT_EULA: "Y"

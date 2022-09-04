@@ -1,0 +1,30 @@
+﻿@implements IDisposable
+
+@inject ISpaAuthService AuthService
+@inject ISpaNavigationBaseService NavigationService
+@inject NavigationManager NavigationManager
+
+@code {
+
+    [Parameter]
+    public EventCallback OnAuthStateChanged { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthService.OnAuthStateChange += HandleAuthStateChanged;
+        await AuthService.InitAuthState();
+    }
+
+    private async Task HandleAuthStateChanged()
+    {
+        // TODO: logic to redirect according to role.
+
+        await OnAuthStateChanged.InvokeAsync();
+    }
+
+    public void Dispose()
+    {
+        AuthService.OnAuthStateChange -= HandleAuthStateChanged;
+    }
+
+}

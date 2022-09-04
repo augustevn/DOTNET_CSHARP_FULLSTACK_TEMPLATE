@@ -1,0 +1,60 @@
+﻿@inject ISpaAuthService AuthService
+
+<EditForm Model="@_userToLogin" OnValidSubmit="@LogUserIn">
+    <FluentValidationValidator />
+
+    <div class="form-group">
+        <label for="inputEmail1" class="form-label">E-mail <span class="text-danger">*</span></label>
+        <InputText @bind-Value="_userToLogin.Email" type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp" />
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="form-label">Password@*LoginTranslation.LoginFormPasswordLabel*@ <span class="text-danger">*</span></label>
+        <div class="input-group">
+            <InputText @bind-Value="_userToLogin.Password" type="@(IsPasswordVisible ? "text" : "password")" class="form-control" id="inputPassword" />
+            <div class="input-group-append">
+                <span class="btn" @onclick="TogglePasswordVisibility">
+                    <span class="bi bi-eye"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <ValidationSummary />
+
+    @if (HasSubmit && !IsLoginSuccess)
+    {
+        <ul class="list-unstyled status-message-container">
+            <li class="text-center bg-danger-light">
+                Login failed.
+                @*((MarkupString)LoginTranslation.LoginFailedMessage)*@
+            </li>
+        </ul>
+    }
+
+    <button type="submit" class="btn btn-danger btn-block btn-lg rounded-pill">
+        Sign in
+        @*LoginTranslation.LoginFormSubmitButtonLabel*@
+    </button>
+</EditForm>
+
+@code {
+
+    private readonly LoginUserRequest _userToLogin = new();
+
+    // private ILoginTranslation LoginTranslation => Translations.GetTranslationsForLanguage(UserProfileService.Preferences.PreferredLanguage);
+    
+    private bool IsPasswordVisible { get; set; }
+    private bool IsLoginSuccess { get; set; }
+    private bool HasSubmit { get; set; }
+
+    private async Task LogUserIn() {
+        await AuthService.LogUserIn(_userToLogin);
+        HasSubmit = true;
+        IsLoginSuccess = true;
+    }
+    
+    private void TogglePasswordVisibility() {
+        IsPasswordVisible = !IsPasswordVisible;
+    }
+
+}

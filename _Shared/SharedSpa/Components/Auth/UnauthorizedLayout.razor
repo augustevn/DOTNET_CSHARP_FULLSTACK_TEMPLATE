@@ -1,0 +1,12 @@
+﻿<AuthStateLayout />
+
+<div>
+    <p>Only unauthenticated users should see this.</p>
+    @ChildContent
+</div>
+
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

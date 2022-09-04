@@ -1,0 +1,35 @@
+﻿@inject ISpaAuthService AuthService
+@inject ISpaNavigationBaseService NavigationService
+
+<AuthStateLayout OnAuthStateChanged="HandleAuthStateChanged"/>
+
+@if (HasAccess)
+{
+    @ChildContent
+}
+else
+{
+    <h2>
+        No access
+    </h2>
+}
+
+@code {
+    [Parameter]
+    public Func<bool>? RequiredPolicy { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    [Parameter]
+    public EventCallback OnAuthStateChanged { get; set; }
+
+    private bool HasAccess { get; set; }
+
+    private async Task HandleAuthStateChanged()
+    {
+        HasAccess = RequiredPolicy == null || RequiredPolicy.Invoke();
+
+        await OnAuthStateChanged.InvokeAsync();
+    }
+}

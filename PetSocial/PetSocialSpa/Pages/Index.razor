@@ -1,0 +1,35 @@
+﻿@page "/"
+
+@inject ISpaAuthService AuthService
+
+<AuthStateLayout OnAuthStateChanged="Init" />
+
+<h2>Index</h2>
+
+@if (!IsLoggedIn)
+{
+    <LoginForm />
+}
+else
+{
+    <p>Signed in with user: @AuthService.CurrentUserId</p>
+    <p>With roles:</p>
+    <ul>
+        @foreach (var userRole in AuthService.CurrentUserRoles)
+        {
+            <li>@userRole</li>
+        }    
+    </ul>
+    
+    <button @onclick="AuthService.LogUserOut">Sign out</button>
+}
+
+
+@code {
+    private bool IsLoggedIn { get; set; }
+    
+    private void Init()
+    {
+        IsLoggedIn = AuthService.IsLoggedIn;
+    }
+}
